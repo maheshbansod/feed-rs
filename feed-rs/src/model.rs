@@ -231,7 +231,7 @@ impl Feed {
 }
 
 /// Type of a feed (RSS, Atom etc)
-#[derive(Clone, Debug, Eq, PartialEq)]
+#[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
 pub enum FeedType {
     Atom,
     JSON,
@@ -412,7 +412,7 @@ impl Entry {
 ///
 /// [Atom spec]: http://www.atomenabled.org/developers/syndication/#category
 /// [RSS 2 spec]: https://validator.w3.org/feed/docs/rss2.html#ltcategorygtSubelementOfLtitemgt
-#[derive(Clone, Debug, Eq, PartialEq)]
+#[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
 pub struct Category {
     /// The category as a human readable string
     /// * Atom (required): Identifies the category.
@@ -508,7 +508,7 @@ impl Content {
 /// Information on the tools used to generate the feed
 ///
 /// Atom: Identifies the software used to generate the feed, for debugging and other purposes.
-#[derive(Clone, Debug, Eq, PartialEq)]
+#[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
 pub struct Generator {
     /// Atom: Additional data
     /// RSS 2: A string indicating the program used to generate the channel.
@@ -547,7 +547,7 @@ impl Generator {
 /// [Atom spec]:  http://www.atomenabled.org/developers/syndication/#optionalFeedElements
 /// [RSS 2 spec]: https://validator.w3.org/feed/docs/rss2.html#ltimagegtSubelementOfLtchannelgt
 /// [RSS 1 spec]: https://validator.w3.org/feed/docs/rss1.html#s5.4
-#[derive(Clone, Debug, Eq, PartialEq)]
+#[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
 pub struct Image {
     /// Link to the image
     /// * Atom: The URL to an image or logo
@@ -610,8 +610,7 @@ impl Image {
 /// Represents a link to an associated resource for the feed or entry.
 ///
 /// [Atom spec]: http://www.atomenabled.org/developers/syndication/#link
-#[derive(Clone, Debug, Eq, PartialEq)]
-#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
+#[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
 pub struct Link {
     /// Link to additional content
     /// * Atom: The URI of the referenced resource (typically a Web page).
@@ -931,7 +930,7 @@ impl MediaThumbnail {
 /// Represents an author, contributor etc.
 ///
 /// [Atom spec]: http://www.atomenabled.org/developers/syndication/#person
-#[derive(Clone, Debug, Eq, PartialEq)]
+#[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
 pub struct Person {
     /// Atom: human-readable name for the person.
     /// JSON Feed: human-readable name for the person.
